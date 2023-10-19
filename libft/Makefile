@@ -6,7 +6,7 @@
 #    By: tosuman <timo42@proton.me>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 10:04:04 by tosuman           #+#    #+#              #
-#    Updated: 2023/10/05 23:40:12 by tischmid         ###   ########.fr        #
+#    Updated: 2023/10/19 11:09:25 by tischmid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ _SRC += ft_putnbr_fd.c
 _SRC += ft_putstr_fd.c
 _SRC += ft_putendl.c
 _SRC += ft_putstr.c
+_SRC += ft_putnbr.c
 _SRC += ft_putchar.c
 
 _SRC += ft_itoa.c

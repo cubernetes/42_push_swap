@@ -6,20 +6,32 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2023/10/19 09:45:17 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:28:42 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEQUE_H
 # define DEQUE_H
 
-typedef struct s_deque
-{
-	void	*data;
-	void	*prev;
-	void	*next;
-}			t_deque;
+typedef struct s_deque		t_deque;
+typedef struct s_deque_node	t_deque_node;
+typedef unsigned int		t_deque_type;
 
-t_deque	list_to_deque(char **list);
+struct						s_deque_node
+{
+	t_deque_node			*prev;
+	t_deque_node			*next;
+	t_deque_type			data;
+};
+
+struct						s_deque
+{
+	t_deque_node			*head;
+};
+
+t_deque						list_to_deque(char **list);
+t_deque						*deque_init(void);
+void						deque_swap(t_deque *deque);
+void						print_deque(t_deque *deque);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:34:41 by tischmid          #+#    #+#             */
-/*   Updated: 2023/10/20 09:40:28 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/10/27 11:26:51 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,23 +120,4 @@ void	deque_rotate(t_deque *deque, int n)
 	else if (n < 0)
 		while (n++)
 			deque->head = deque->head->prev;
-}
-
-int	main(void)
-{
-	t_deque	*deque_a;
-
-	deque_a = deque_init();
-	deque_push_right(deque_a, 1);
-	deque_push_right(deque_a, 2);
-	deque_push_right(deque_a, 3);
-	deque_push_left(deque_a, 5);
-	deque_push_left(deque_a, 4);
-	deque_rotate(deque_a, 2);
-	deque_swap(deque_a);
-	deque_swap(deque_a);
-	/* deque_pop_right(deque_a); */
-	deque_print(deque_a);
-	deque_free(deque_a);
-	return (0);
 }

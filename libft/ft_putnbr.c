@@ -6,7 +6,7 @@
 /*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:29:25 by tosuman           #+#    #+#             */
-/*   Updated: 2023/10/19 11:14:32 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/01 00:20:15 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_putnbr(int nb)
 	if (nb > 9)
 	{
 		count += ft_putnbr(nb / 10);
-		count += ft_putchar(nb % 10 + '0');
+		count += ft_putchar((char)(nb % 10 + '0'));
 	}
 	else if (nb == INT_MIN)
 	{
@@ -34,6 +34,6 @@ int	ft_putnbr(int nb)
 		count += ft_putnbr(-nb);
 	}
 	else
-		count += ft_putchar(nb % 10 + '0');
+		count += ft_putchar((char)(nb % 10 + '0'));
 	return (count);
 }

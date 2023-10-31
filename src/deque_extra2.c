@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   deque_extra2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
+/*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/09 14:24:36 by tosuman           #+#    #+#             */
-/*   Updated: 2023/11/01 00:19:22 by tischmid         ###   ########.fr       */
+/*   Created: 2023/10/19 14:25:38 by tischmid          #+#    #+#             */
+/*   Updated: 2023/11/01 00:42:43 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "../include/deque.h"
 
-int	ft_putchar_fd(char c, int fd)
+void	deque_copy(t_deque *deque)
 {
-	return ((int)write(fd, &c, 1));
 }

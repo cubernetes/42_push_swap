@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:25:38 by tischmid          #+#    #+#             */
-/*   Updated: 2023/10/20 09:43:40 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/01 00:23:53 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 #include "../libft/libft.h"
 #include <stdlib.h>
 
-t_deque	list_to_deque(char **list)
+/* frees array_list afterwards */
+t_deque	*array_list_to_deque(char **array_list)
 {
-	t_deque	deque;
+	t_deque	*deque;
+	char	**orig_array_list;
 
+	deque = deque_init();
+	orig_array_list = array_list;
+	while (*array_list)
+	{
+		deque_push_right(deque, (t_deque_type)ft_atoi(*array_list));
+		free(*array_list);
+		++array_list;
+	}
+	free(orig_array_list);
 	return (deque);
 }
 
@@ -54,8 +65,8 @@ void	deque_free(t_deque *deque)
 	tail = head->prev;
 	while (head != tail)
 	{
-		free(head);
 		head = head->next;
+		free(head->prev);
 	}
 	free(head);
 	free(deque);

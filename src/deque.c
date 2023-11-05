@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 09:34:41 by tischmid          #+#    #+#             */
-/*   Updated: 2023/10/27 11:26:51 by tischmid         ###   ########.fr       */
+/*   Created: 2023/10/19 14:25:38 by tischmid          #+#    #+#             */
+/*   Updated: 2023/11/05 01:46:35 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,110 +14,69 @@
 #include "../libft/libft.h"
 #include <stdlib.h>
 
-void	deque_push_left(t_deque *deque, t_deque_type data)
+/* frees array_list afterwards */
+t_deque	*array_list_to_deque(char **array_list)
 {
-	t_deque_node	*new;
+	t_deque	*deque;
+	char	**orig_array_list;
 
-	if (deque->head)
+	deque = deque_init();
+	orig_array_list = array_list;
+	while (*array_list)
 	{
-		new = malloc(sizeof(*new));
-		new->data = data;
-		new->next = deque->head;
-		new->prev = deque->head->prev;
-		deque->head->prev->next = new;
-		deque->head->prev = new;
-		deque->head = new;
+		deque_push_right(deque, (t_deque_type)ft_atoi(*array_list));
+		free(*array_list);
+		++array_list;
 	}
-	else
-	{
-		deque->head = malloc(sizeof(*deque->head));
-		deque->head->data = data;
-		deque->head->next = deque->head;
-		deque->head->prev = deque->head;
-	}
+	free(orig_array_list);
+	return (deque);
 }
 
-void	deque_push_right(t_deque *deque, t_deque_type data)
-{
-	t_deque_node	*new;
-
-	if (deque->head)
-	{
-		new = malloc(sizeof(*new));
-		new->data = data;
-		new->next = deque->head;
-		new->prev = deque->head->prev;
-		deque->head->prev->next = new;
-		deque->head->prev = new;
-	}
-	else
-	{
-		deque->head = malloc(sizeof(*deque->head));
-		deque->head->data = data;
-		deque->head->next = deque->head;
-		deque->head->prev = deque->head;
-	}
-}
-
-t_deque_node	*deque_pop_right(t_deque *deque)
+void	deque_print(t_deque *deque)
 {
 	t_deque_node	*head;
-	t_deque_node	*prev;
-	t_deque_node	*prev_prev;
+	t_deque_node	*orig_head;
 
 	head = deque->head;
-	prev = deque->head->prev;
-	prev_prev = prev->prev;
-	if (!head)
-		return (NULL);
-	if (head == head->next)
-		deque->head = NULL;
+	orig_head = head;
+	if (head)
+		ft_printf("%d", head->data);
 	else
 	{
-		deque->head->prev = prev_prev;
-		prev_prev->next = deque->head;
-	}
-	prev->next = NULL;
-	prev->prev = NULL;
-	return (prev);
-}
-
-t_deque_node	*deque_pop_left(t_deque *deque)
-{
-	t_deque_node	*prev;
-	t_deque_node	*head;
-	t_deque_node	*next;
-
-	head = deque->head;
-	prev = head->prev;
-	next = head->next;
-	if (!head)
-		return (NULL);
-	if (head == head->next)
-		deque->head = NULL;
-	else
-	{
-		deque->head = next;
-		next->prev = prev;
-		prev->next = next;
-	}
-	head->next = NULL;
-	head->prev = NULL;
-	return (head);
-}
-
-void	deque_rotate(t_deque *deque, int n)
-{
-	if (!deque->head)
+		ft_printf("Empty deque.\n");
 		return ;
-	if (n > 0)
-	{
-		while (n--)
-		{
-			deque->head = deque->head->next;
-		}
 	}
-	else if (n < 0)
-		while (n++)
-			deque->head = deque->head->prev;
+	while (head->next != orig_head)
+	{
+		ft_printf(" -> %d", head->next->data);
+		head = head->next;
+	}
+	ft_printf("\n");
+}
+
+void	deque_free(t_deque *deque)
+{
+	t_deque_node	*head;
+	t_deque_node	*tail;
+
+	head = deque->head;
+	if (!head)
+		return ;
+	tail = head->prev;
+	while (head != tail)
+	{
+		head = head->next;
+		free(head->prev);
+	}
+	free(head);
+	free(deque);
+}
+
+t_deque	*deque_init(void)
+{
+	t_deque	*deque;
+
+	deque = malloc(sizeof(*deque));
+	deque->head = NULL;
+	return (deque);
 }

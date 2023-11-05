@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque.c                                            :+:      :+:    :+:   */
+/*   deque_push.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:34:41 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/05 01:45:33 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/05 01:55:03 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../libft/libft.h"
 #include <stdlib.h>
 
-void	deque_push_left(t_deque *deque, t_deque_type data)
+void	deque_push_value_left(t_deque *deque, t_deque_type data)
 {
 	t_deque_node	*new;
 
@@ -55,7 +55,7 @@ void	deque_push_node_left(t_deque *deque, t_deque_node *node)
 	}
 }
 
-void	deque_push_right(t_deque *deque, t_deque_type data)
+void	deque_push_value_right(t_deque *deque, t_deque_type data)
 {
 	t_deque_node	*new;
 

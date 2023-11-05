@@ -6,11 +6,27 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 01:46:39 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/05 01:46:58 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/05 02:15:30 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/deque.h"
+
+void	deque_rotate(t_deque *deque, int n)
+{
+	if (!deque->head)
+		return ;
+	if (n > 0)
+	{
+		while (n--)
+		{
+			deque->head = deque->head->next;
+		}
+	}
+	else if (n < 0)
+		while (n++)
+			deque->head = deque->head->prev;
+}
 
 void	deque_swap(t_deque *deque)
 {
@@ -37,20 +53,4 @@ void	deque_swap(t_deque *deque)
 	orig_next->next = orig_head;
 	orig_next->prev = orig_prev;
 	orig_next_next->prev = orig_head;
-}
-
-void	deque_rotate(t_deque *deque, int n)
-{
-	if (!deque->head)
-		return ;
-	if (n > 0)
-	{
-		while (n--)
-		{
-			deque->head = deque->head->next;
-		}
-	}
-	else if (n < 0)
-		while (n++)
-			deque->head = deque->head->prev;
 }

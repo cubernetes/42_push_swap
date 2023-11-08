@@ -6,14 +6,14 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 01:44:47 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/05 01:45:03 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/08 04:04:31 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/deque.h"
 #include <stddef.h>
 
-t_deque_node	*deque_pop_right(t_deque *deque)
+t_deque_node	*deque_pop_bottom(t_deque *deque)
 {
 	t_deque_node	*head;
 	t_deque_node	*prev;
@@ -36,7 +36,7 @@ t_deque_node	*deque_pop_right(t_deque *deque)
 	return (prev);
 }
 
-t_deque_node	*deque_pop_left(t_deque *deque)
+t_deque_node	*deque_pop_top(t_deque *deque)
 {
 	t_deque_node	*prev;
 	t_deque_node	*head;

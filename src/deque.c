@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:25:38 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/05 05:21:35 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/08 04:48:20 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_deque	*array_list_to_deque(char **array_list)
 	deque = deque_init();
 	while (*array_list)
 	{
-		deque_push_value_right(deque, (t_deque_type)ft_atoi(*array_list));
+		deque_push_value_bottom(deque, (t_deque_type)ft_atoi(*array_list));
 		++array_list;
 	}
 	return (deque);

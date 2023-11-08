@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:25:38 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/05 04:40:28 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/08 05:16:19 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ t_deque	*deque_copy(t_deque *deque)
 		return (new_deque);
 	orig_head = deque->head;
 	head = orig_head;
-	deque_push_value_right(new_deque, (t_deque_type)head->data);
+	deque_push_value_bottom(new_deque, (t_deque_type)head->data);
 	head = head->next;
 	while (head != orig_head)
 	{
-		deque_push_value_right(new_deque, (t_deque_type)head->data);
+		deque_push_value_bottom(new_deque, (t_deque_type)head->data);
 		head = head->next;
 	}
 	return (new_deque);
@@ -125,7 +125,7 @@ t_deque	*deque_slice(t_deque *deque, int start, int end, int step)
 		head = head->next;
 	while ((step > 0 && start < end) || (step < 0 && start > end))
 	{
-		deque_push_value_right(slice, head->data);
+		deque_push_value_bottom(slice, head->data);
 		size = ft_abs(step);
 		while (size--)
 		{
@@ -139,6 +139,7 @@ t_deque	*deque_slice(t_deque *deque, int start, int end, int step)
 	return (slice);
 }
 
+#include "../libft/libft.h"
 int	deque_index(t_deque *deque, t_deque_type data)
 {
 	t_deque_node	*orig_head;

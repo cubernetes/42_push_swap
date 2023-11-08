@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/05 04:33:01 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/08 04:45:04 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ struct						s_deque
 	t_deque_node			*head;
 };
 
-t_deque_node				*deque_pop_right(t_deque *deque);
-t_deque_node				*deque_pop_left(t_deque *deque);
-void						deque_push_value_left(t_deque *deque,
+t_deque_node				*deque_pop_bottom(t_deque *deque);
+t_deque_node				*deque_pop_top(t_deque *deque);
+void						deque_push_value_top(t_deque *deque,
 								t_deque_type data);
-void						deque_push_node_left(t_deque *deque,
+void						deque_push_node_top(t_deque *deque,
 								t_deque_node *node);
-void						deque_push_value_right(t_deque *deque,
+void						deque_push_value_bottom(t_deque *deque,
 								t_deque_type data);
-void						deque_push_node_right(t_deque *deque,
+void						deque_push_node_bottom(t_deque *deque,
 								t_deque_node *node);
 void						deque_swap(t_deque *deque);
 void						deque_rotate(t_deque *deque, int n);
@@ -54,5 +54,7 @@ t_deque						*deque_init(void);
 t_deque						*deque_slice(t_deque *deque, int start, int end,
 								int step);
 int							deque_index(t_deque *deque, t_deque_type data);
+void						deque_extend_free(t_deque *deque_a,
+								t_deque *deque_b);
 
 #endif

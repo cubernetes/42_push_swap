@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/08 05:39:05 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/09 01:00:21 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	print_op(char *op, int amount)
 	return (count);
 }
 
-int	flush_ops(t_deque *ops)
+int	print_ops(t_deque *ops)
 {
 	static char	*ops_strings[11] = {"ra", "rra", "rb", "rrb", "rr", "rrr", "sa",
-			"sb", "ss", "pa", "pb"};
+		"sb", "ss", "pa", "pb"};
 	int			count;
 
 	count = 0;
@@ -132,18 +132,45 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 	while (deque_b->head)
 	{
 		idx_max = deque_argmax(deque_b);
+		/* if (idx_max == -1) */
+		/* { */
+			/* continue ; */
+		/* } */
 		size = deque_size(deque_b);
 		i = -1;
-		if (size - idx_max < idx_max && (deque_rotate(deque_b, -(size
-						- idx_max)), 1))
+		if (size - idx_max < idx_max)
 		{
 			while (++i < size - idx_max)
-				deque_push_value_bottom(ops, OP_RRB);
+			{
+				if (deque_b->head->data > deque_a->head->prev->data)
+				{
+					deque_push_value_bottom(ops, OP_PA);
+					deque_push_value_bottom(ops, OP_RA);
+					deque_push_node_bottom(deque_a, deque_pop_top(deque_b));
+				}
+				else
+				{
+					deque_push_value_bottom(ops, OP_RRB);
+					deque_rotate(deque_b, -1);
+				}
+			}
 		}
-		else if ((deque_rotate(deque_b, idx_max), 1))
+		else
 		{
 			while (++i < idx_max)
-				deque_push_value_bottom(ops, OP_RB);
+			{
+				if (deque_b->head->data > deque_a->head->prev->data)
+				{
+					deque_push_value_bottom(ops, OP_PA);
+					deque_push_value_bottom(ops, OP_RA);
+					deque_push_node_bottom(deque_a, deque_pop_top(deque_b));
+				}
+				else
+				{
+					deque_push_value_bottom(ops, OP_RB);
+					deque_rotate(deque_b, 1);
+				}
+			}
 		}
 		deque_push_value_bottom(ops, OP_PA);
 		deque_push_node_top(deque_a, deque_pop_top(deque_b));
@@ -189,7 +216,7 @@ void	push_swap(t_deque *deque_a)
 	deques[1] = deque_init();
 	deque_extend_free(ops, push_buckets(deques[0], deques[1], min_bucket_size));
 	deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
-	flush_ops(ops);
+	print_ops(ops);
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/09 01:00:21 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/17 09:01:24 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	print_op(char *op, int amount)
 int	print_ops(t_deque *ops)
 {
 	static char	*ops_strings[11] = {"ra", "rra", "rb", "rrb", "rr", "rrr", "sa",
-		"sb", "ss", "pa", "pb"};
+			"sb", "ss", "pa", "pb"};
 	int			count;
 
 	count = 0;
@@ -59,7 +59,8 @@ t_deque	*push_buckets(t_deque *deque_a, t_deque *deque_b, size_t bucket_size)
 		bucket_size = 1;
 	n = bucket_size;
 	slice = deque_slice(sorted_deque, n - bucket_size, n, 1);
-	half_slice = deque_slice(sorted_deque, n - bucket_size, n - bucket_size / 2, 1);
+	half_slice = deque_slice(sorted_deque, n - bucket_size, n - bucket_size / 2,
+			1);
 	while (deque_a->head)
 	{
 		idx = deque_index(slice, deque_a->head->data);
@@ -73,18 +74,18 @@ t_deque	*push_buckets(t_deque *deque_a, t_deque *deque_b, size_t bucket_size)
 			{
 				n += bucket_size;
 				slice = deque_slice(sorted_deque, n - bucket_size, n, 1);
-				half_slice = deque_slice(sorted_deque, n - bucket_size, n - bucket_size / 2, 1);
+				half_slice = deque_slice(sorted_deque, n - bucket_size, n
+						- bucket_size / 2, 1);
 			}
 		}
 		else
 		{
-			if (deque_b->head && deque_index(half_slice, deque_b->head->data)
-				!= -1)
-				(deque_push_value_bottom(ops, OP_RR), deque_rotate(deque_a,
-						1), deque_rotate(deque_b, 1));
+			if (deque_b->head && deque_index(half_slice, deque_b->head->data) !=
+				-1)
+				(deque_push_value_bottom(ops, OP_RR), deque_rotate(deque_a, 1),
+					deque_rotate(deque_b, 1));
 			else
-				(deque_push_value_bottom(ops, OP_RA), deque_rotate(deque_a,
-						1));
+				(deque_push_value_bottom(ops, OP_RA), deque_rotate(deque_a, 1));
 		}
 	}
 	deque_free(slice);
@@ -92,20 +93,20 @@ t_deque	*push_buckets(t_deque *deque_a, t_deque *deque_b, size_t bucket_size)
 	return (ops);
 }
 
-int	deque_argmax(t_deque *deque)
+int	deque_argmax(t_deque *deque, int *max_idx)
 {
 	t_deque_node	*orig_head;
 	t_deque_node	*head;
 	t_deque_type	max_value;
-	int				max_idx;
 	int				idx;
 
 	orig_head = deque->head;
 	head = orig_head;
 	if (!head)
-		return (-1);
+		return (INT_MIN);
 	idx = 0;
-	max_idx = idx;
+	if (max_idx)
+		*max_idx = idx;
 	max_value = head->data;
 	head = head->next;
 	while (head != orig_head)
@@ -114,11 +115,12 @@ int	deque_argmax(t_deque *deque)
 		if (head->data > max_value)
 		{
 			max_value = head->data;
-			max_idx = idx;
+			if (max_idx)
+				*max_idx = idx;
 		}
 		head = head->next;
 	}
-	return (max_idx);
+	return (max_value);
 }
 
 t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
@@ -129,29 +131,35 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 	t_deque	*ops;
 
 	ops = deque_init();
-	while (deque_b->head)
+	while (deque_b->head || (deque_a->head
+			&& deque_a->head->prev->data > deque_argmax(deque_b, &idx_max)
+			&& deque_a->head->prev->data < deque_a->head->data))
 	{
-		idx_max = deque_argmax(deque_b);
-		/* if (idx_max == -1) */
-		/* { */
-			/* continue ; */
-		/* } */
+		if (deque_a->head && deque_a->head->prev->data > deque_argmax(deque_b,
+				&idx_max) && deque_a->head->prev->data < deque_a->head->data)
+		{
+			deque_push_value_bottom(ops, OP_RRA);
+			deque_rotate(deque_a, -1);
+			continue ;
+		}
 		size = deque_size(deque_b);
 		i = -1;
 		if (size - idx_max < idx_max)
 		{
 			while (++i < size - idx_max)
 			{
-				if (deque_b->head->data > deque_a->head->prev->data)
+				deque_push_value_bottom(ops, OP_RRB);
+				deque_rotate(deque_b, -1);
+				if (deque_b->head
+					&& (deque_b->head->data > deque_a->head->prev->data
+						|| (deque_a->head->prev->data > deque_argmax(deque_b,
+								NULL)
+							&& deque_a->head->prev->data == deque_argmax(deque_a,
+								NULL))))
 				{
 					deque_push_value_bottom(ops, OP_PA);
 					deque_push_value_bottom(ops, OP_RA);
 					deque_push_node_bottom(deque_a, deque_pop_top(deque_b));
-				}
-				else
-				{
-					deque_push_value_bottom(ops, OP_RRB);
-					deque_rotate(deque_b, -1);
 				}
 			}
 		}
@@ -159,7 +167,12 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 		{
 			while (++i < idx_max)
 			{
-				if (deque_b->head->data > deque_a->head->prev->data)
+				if (deque_b->head
+					&& (deque_b->head->data > deque_a->head->prev->data
+						|| (deque_a->head->prev->data > deque_argmax(deque_b,
+								NULL)
+							&& deque_a->head->prev->data == deque_argmax(deque_a,
+								NULL))))
 				{
 					deque_push_value_bottom(ops, OP_PA);
 					deque_push_value_bottom(ops, OP_RA);
@@ -172,8 +185,11 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 				}
 			}
 		}
-		deque_push_value_bottom(ops, OP_PA);
-		deque_push_node_top(deque_a, deque_pop_top(deque_b));
+		if (deque_b->head)
+		{
+			deque_push_value_bottom(ops, OP_PA);
+			deque_push_node_top(deque_a, deque_pop_top(deque_b));
+		}
 	}
 	return (ops);
 }
@@ -194,7 +210,7 @@ void	push_swap(t_deque *deque_a)
 	ops = deque_init();
 	while (++bucket_size < ft_min(60, deque_size(deque_a)))
 	{
-		deque_free(ops);
+	deque_free(ops);
 		deque_free(deques[0]);
 		deque_free(deques[1]);
 		ops = deque_init();

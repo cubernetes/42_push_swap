@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/17 09:01:24 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:00:24 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 	return (ops);
 }
 
-void	push_swap(t_deque *deque_a)
+void	push_swap_old(t_deque *deque_a)
 {
 	t_deque	*deques[2];
 	t_deque	*ops;
@@ -233,6 +233,20 @@ void	push_swap(t_deque *deque_a)
 	deque_extend_free(ops, push_buckets(deques[0], deques[1], min_bucket_size));
 	deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
 	print_ops(ops);
+}
+
+void	push_swap(t_deque *deque_a)
+{
+	t_size	bucket_size;
+	t_deque	*operations;
+	t_deque	*minimal_operations;
+
+	minimal_operations = NULL;
+	bucket_size = 0;
+	while (++bucket_size < ft_min(MAX_BUCKET_SIZE, deque_size(deque_a)))
+	{
+		push_swap(bucket_size);
+	}
 }
 
 int	main(int argc, char **argv)

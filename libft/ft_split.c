@@ -6,7 +6,7 @@
 /*   By: tischmid <timo42@proton.me>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 20:37:07 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/22 00:22:14 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/22 04:48:26 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ char	**ft_split(char const *s, char c)
 		start = s;
 		while (*s != c && *s)
 			++s;
-		"bla whatever string"
 		arr[idx] = malloc(sizeof(**arr) * (size_t)(s - start + 1));
 		if (!save_strlcpy(arr, ++idx, start, (size_t)(s - start + 1)))
 			return (0);

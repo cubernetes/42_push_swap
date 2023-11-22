@@ -6,14 +6,14 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/08 04:40:19 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/22 05:31:11 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "./deque.h"
+# include "../libft/libft.h"
 
 # define OP_RA   0
 # define OP_RRA  1
@@ -29,9 +29,5 @@
 
 int		validate_arguments(char **list);
 t_deque	*parse_args(int argc, char **argv);
-int		cmp_int_asc(t_deque_type a, t_deque_type b);
-int		cmp_int_desc(t_deque_type a, t_deque_type b);
-int		ft_max(int a, int b);
-int		ft_min(int a, int b);
 
 #endif

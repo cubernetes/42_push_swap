@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque.c                                            :+:      :+:    :+:   */
+/*   deque_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 14:25:38 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/22 00:24:03 by tischmid         ###   ########.fr       */
+/*   Created: 2023/11/22 14:37:38 by tischmid          #+#    #+#             */
+/*   Updated: 2023/11/22 14:37:53 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/deque.h"
-#include "../libft/libft.h"
-#include <stdlib.h>
-
-t_deque	*array_list_to_deque(char **array_list)
-{
-	t_deque	*deque;
-
-	deque = deque_init();
-	while (*array_list)
-	{
-		deque_push_value_bottom(deque, (t_deque_type)ft_atoi(*array_list));
-		++array_list;
-		deque->size += 1;
-	}
-	return (deque);
-}
+#include "libft.h"
 
 void	deque_print(t_deque *deque)
 {
@@ -48,32 +32,4 @@ void	deque_print(t_deque *deque)
 		head = head->next;
 	}
 	ft_printf("\n");
-}
-
-void	deque_free(t_deque *deque)
-{
-	t_deque_node	*head;
-	t_deque_node	*tail;
-
-	head = deque->head;
-	if (!head)
-		return ;
-	tail = head->prev;
-	while (head != tail)
-	{
-		head = head->next;
-		free(head->prev);
-	}
-	free(head);
-	free(deque);
-}
-
-t_deque	*deque_init(void)
-{
-	t_deque	*deque;
-
-	deque = malloc(sizeof(*deque));
-	deque->head = NULL;
-	deque->size = 0;
-	return (deque);
 }

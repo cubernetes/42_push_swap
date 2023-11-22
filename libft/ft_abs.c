@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
+/*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/03 11:52:45 by tosuman           #+#    #+#             */
-/*   Updated: 2023/10/05 23:10:39 by tischmid         ###   ########.fr       */
+/*   Created: 2023/11/22 15:08:11 by tischmid          #+#    #+#             */
+/*   Updated: 2023/11/22 15:08:11 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <limits.h>
 
 unsigned int	ft_abs(int n)
 {

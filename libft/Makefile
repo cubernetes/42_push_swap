@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tosuman <timo42@proton.me>                 +#+  +:+       +#+         #
+#    By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/12 10:04:04 by tosuman           #+#    #+#              #
-#    Updated: 2023/11/01 00:15:19 by tischmid         ###   ########.fr        #
+#    Created: 2023/11/22 15:09:11 by tischmid          #+#    #+#              #
+#    Updated: 2023/11/22 15:10:40 by tischmid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,31 @@ _SRC_BONUS += ft_lstmap.c
 _SRC += ft_char_in_charset.c
 _SRC += ft_isspace.c
 _SRC += ft_abs.c
+_SRC += ft_max.c
+_SRC += ft_min.c
+
+_SRC += deque_init.c
+_SRC += deque_free.c
+_SRC += deque_print.c
+_SRC += array_list_to_deque.c
+_SRC += deque_index.c
+_SRC += deque_slice.c
+_SRC += deque_sort.c
+_SRC += deque_copy.c
+_SRC += deque_size.c
+_SRC += deque_extend_free.c
+_SRC += deque_swap.c
+_SRC += deque_rotate.c
+_SRC += deque_pop_top.c
+_SRC += deque_pop_bottom.c
+_SRC += deque_push_node_bottom.c
+_SRC += deque_push_value_bottom.c
+_SRC += deque_push_node_top.c
+_SRC += deque_push_value_top.c
+_SRC += deque_equal.c
+
+_SRC += cmp_int_desc.c
+_SRC += cmp_int_asc.c
 
 unexport _DEPS
 _DEPS += libft.h

@@ -6,11 +6,10 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:47:03 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/22 00:25:41 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/22 05:13:36 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/deque.h"
 #include "../libft/libft.h"
 #include <stdlib.h>
 

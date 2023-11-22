@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
+/*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 17:39:55 by tosuman           #+#    #+#             */
-/*   Updated: 2023/05/22 17:39:56 by tosuman          ###   ########.fr       */
+/*   Created: 2023/11/22 15:08:28 by tischmid          #+#    #+#             */
+/*   Updated: 2023/11/22 15:08:28 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
 #include <limits.h>
-
-void	ft_bzero(void *s, size_t n);
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

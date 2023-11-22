@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
+/*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 17:28:18 by tosuman           #+#    #+#             */
-/*   Updated: 2023/06/02 19:58:10 by tischmid         ###   ########.fr       */
+/*   Created: 2023/11/22 15:08:37 by tischmid          #+#    #+#             */
+/*   Updated: 2023/11/22 15:08:37 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(int c);
-int	ft_isdigit(int c);
+#include "libft.h"
 
 int	ft_atoi(char const *nptr)
 {

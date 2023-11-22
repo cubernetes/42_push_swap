@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deque_extra.c                                      :+:      :+:    :+:   */
+/*   deque_swap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 01:46:39 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/18 19:57:46 by tischmid         ###   ########.fr       */
+/*   Created: 2023/11/22 14:40:38 by tischmid          #+#    #+#             */
+/*   Updated: 2023/11/22 14:40:42 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/deque.h"
-
-void	deque_rotate(t_deque *deque, int n)
-{
-	if (!deque->head)
-		return ;
-	if (n > 0)
-	{
-		while (n--)
-		{
-			deque->head = deque->head->next;
-		}
-	}
-	else if (n < 0)
-		while (n++)
-			deque->head = deque->head->prev;
-}
+#include "libft.h"
 
 void	deque_swap(t_deque *deque)
 {
@@ -53,14 +37,4 @@ void	deque_swap(t_deque *deque)
 	orig_next->next = orig_head;
 	orig_next->prev = orig_prev;
 	orig_next_next->prev = orig_head;
-}
-
-void	deque_extend_free(t_deque *deque_a, t_deque *deque_b)
-{
-	while (deque_b->head)
-	{
-		deque_push_node_bottom(deque_a, deque_pop_top(deque_b));
-		deque_a->size += 1;
-	}
-	deque_free(deque_b);
 }

@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:34:41 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/08 04:04:47 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:55:52 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	deque_push_value_top(t_deque *deque, t_deque_type data)
 		deque->head->next = deque->head;
 		deque->head->prev = deque->head;
 	}
+	deque->size += 1;
 }
 
 void	deque_push_node_top(t_deque *deque, t_deque_node *node)
@@ -53,6 +54,7 @@ void	deque_push_node_top(t_deque *deque, t_deque_node *node)
 		deque->head->next = deque->head;
 		deque->head->prev = deque->head;
 	}
+	deque->size += 1;
 }
 
 void	deque_push_value_bottom(t_deque *deque, t_deque_type data)
@@ -75,6 +77,7 @@ void	deque_push_value_bottom(t_deque *deque, t_deque_type data)
 		deque->head->next = deque->head;
 		deque->head->prev = deque->head;
 	}
+	deque->size += 1;
 }
 
 void	deque_push_node_bottom(t_deque *deque, t_deque_node *node)
@@ -92,4 +95,5 @@ void	deque_push_node_bottom(t_deque *deque, t_deque_node *node)
 		deque->head->next = deque->head;
 		deque->head->prev = deque->head;
 	}
+	deque->size += 1;
 }

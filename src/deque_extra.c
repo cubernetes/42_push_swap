@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 01:46:39 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/08 05:12:39 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:57:46 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void	deque_swap(t_deque *deque)
 void	deque_extend_free(t_deque *deque_a, t_deque *deque_b)
 {
 	while (deque_b->head)
+	{
 		deque_push_node_bottom(deque_a, deque_pop_top(deque_b));
+		deque_a->size += 1;
+	}
 	deque_free(deque_b);
 }

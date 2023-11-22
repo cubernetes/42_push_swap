@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 01:44:47 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/08 04:04:31 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:55:17 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_deque_node	*deque_pop_bottom(t_deque *deque)
 	}
 	prev->next = NULL;
 	prev->prev = NULL;
+	deque->size -= 1;
 	return (prev);
 }
 
@@ -57,6 +58,7 @@ t_deque_node	*deque_pop_top(t_deque *deque)
 	}
 	head->next = NULL;
 	head->prev = NULL;
+	deque->size -= 1;
 	return (head);
 }
 

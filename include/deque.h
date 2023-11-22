@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/08 04:45:04 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/18 19:49:45 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ struct						s_deque_node
 struct						s_deque
 {
 	t_deque_node			*head;
+	size_t					size;
 };
 
 t_deque_node				*deque_pop_bottom(t_deque *deque);

@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:25:38 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/08 05:16:19 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/21 21:06:35 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ t_deque	*deque_slice(t_deque *deque, int start, int end, int step)
 		end = size;
 	else if ((end - start) * step <= 0)
 		return (slice);
+		/* return (slice->size = , slice); */
 	head = deque->head;
 	size = start;
 	while (size--)

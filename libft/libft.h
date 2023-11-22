@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:09:08 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/22 15:09:08 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:40:56 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_list
 }							t_list;
 
 typedef struct s_deque		t_deque;
-
 typedef struct s_deque_node	t_deque_node;
 
 typedef int					t_deque_type;

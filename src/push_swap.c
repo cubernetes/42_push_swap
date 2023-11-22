@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/22 14:29:03 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:55:00 by tischmid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_deque	*push_buckets(t_deque *deque_a, t_deque *deque_b, size_t bucket_size,
 		bucket_size = 1;
 	n = bucket_size;
 	slice = deque_slice(sorted_deque, (int)(n - bucket_size), (int)n, 1);
-	half_slice = deque_slice(sorted_deque, (int)(n - bucket_size), (int)(n - bucket_size) / 2,
+	half_slice = deque_slice(sorted_deque, (int)(n - bucket_size), (int)(n - bucket_size / 2),
 			1);
 	while (deque_a->head)
 	{
@@ -76,7 +76,7 @@ t_deque	*push_buckets(t_deque *deque_a, t_deque *deque_b, size_t bucket_size,
 				n += bucket_size;
 				slice = deque_slice(sorted_deque, (int)(n - bucket_size), (int)n, 1);
 				half_slice = deque_slice(sorted_deque, (int)(n - bucket_size), (int)(n
-						- bucket_size) / 2, 1);
+						- bucket_size / 2), 1);
 			}
 		}
 		else
@@ -208,8 +208,8 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 				}
 				else
 				{
-					deque_push_value_bottom(ops, OP_RB);
-					deque_rotate(deque_b, 1);
+				 deque_push_value_bottom(ops, OP_RB);
+				 deque_rotate(deque_b, 1);
 				}
 			}
 		}
@@ -222,6 +222,14 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 		deque_rotate(deque_a, -1);
 	}
 	return (ops);
+}
+
+void optimize_ops(t_deque **ops)
+{
+	t_deque	*new_ops;
+
+	deque_free(*ops);
+	*ops = new_ops;
 }
 
 t_deque	*push_swap_benchmark(t_deque *deque_a)
@@ -241,10 +249,10 @@ t_deque	*push_swap_benchmark(t_deque *deque_a)
 	min_bucket_size = 1;
 	ops = deque_init();
 	best_factor = 1.0;
-	while (++bucket_size < (size_t)ft_min(300, ft_max(1, (int)deque_size(deque_a)))) /* 500 ->80 --120 and 0.79 to 0.91 */
+	while (++bucket_size < (size_t)ft_min(120, ft_max(80, (int)deque_size(deque_a)))) /* 500 ->80 --120 and 0.79 to 0.91 */
 	{
-		factor = 1.0;
-		while (factor > 0.50)
+		factor = 0.91;
+		while (factor > 0.79)
 		{
 			deque_free(ops);
 			deque_free(deques[0]);
@@ -255,7 +263,7 @@ t_deque	*push_swap_benchmark(t_deque *deque_a)
 			deque_extend_free(ops, push_buckets(deques[0], deques[1],
 					bucket_size, factor));
 			deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
-			if (deque_size(ops) < (size_t)min_ops)
+			if (optimize_ops(&ops) < (size_t)min_ops)
 			{
 				min_bucket_size = bucket_size;
 				best_factor = factor;
@@ -273,7 +281,7 @@ t_deque	*push_swap_benchmark(t_deque *deque_a)
 	deque_extend_free(ops, push_buckets(deques[0], deques[1], min_bucket_size,
 			best_factor));
 	deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
-	fprintf(stderr, "Buckets: %zu\nFactor: %.10f\n", min_bucket_size, best_factor);
+	/* fprintf(stderr, "Buckets: %zu\nFactor: %.10f\n", min_bucket_size, best_factor); */
 	return (ops);
 }
 

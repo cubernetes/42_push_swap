@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/22 05:31:11 by tischmid         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:24:04 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@
 # define OP_SS   8
 # define OP_PA   9
 # define OP_PB   10
+
+/* "6" for a 16GB RAM + 8GB swap system, "7" may freeze your system!!!*/
+# define MAX_BRUTE_FORCE 6
+
+typedef struct s_state
+{
+	t_deque	*deque_a;
+	t_deque	*deque_b;
+	t_deque	*ops;
+}			t_state;
+
 
 int		validate_arguments(char **list);
 t_deque	*parse_args(int argc, char **argv);

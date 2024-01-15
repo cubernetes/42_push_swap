@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:47:03 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 11:52:41 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 19:19:09 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,26 @@ int	validate_deque(t_deque *deque, int status)
 	t_deque			*sorted_deque;
 	t_deque_type	prev_value;
 	t_deque_type	value;
+	t_deque_node	*node;
 	int				i;
 
 	if (status == -1)
-		return (0);
+		return (deque_free(deque), 0);
 	sorted_deque = deque_copy(deque);
 	deque_sort(sorted_deque, cmp_int_asc);
 	i = 0;
 	prev_value = *&prev_value;
 	while (sorted_deque->head)
 	{
-		value = deque_pop_top(sorted_deque)->data;
-		if (i > 0 && prev_value == value)
-			return (0);
+		node = deque_pop_top(sorted_deque);
+		value = node->data;
+		free(node);
+		if (i > 0 && prev_value == value && (deque_free(sorted_deque), 1))
+			return (deque_free(deque), 0);
 		prev_value = value;
 		++i;
 	}
+	deque_free(sorted_deque);
 	return (1);
 }
 

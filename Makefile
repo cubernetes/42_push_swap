@@ -6,7 +6,7 @@
 #    By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 15:02:16 by tischmid          #+#    #+#              #
-#    Updated: 2023/12/06 11:45:11 by tosuman          ###   ########.fr        #
+#    Updated: 2024/01/15 18:14:10 by tosuman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJ          = $(addprefix $(OBJDIR)/,$(_OBJ))
 INCLUDE      = $(addprefix $(INCLUDEDIR)/,$(_HEADERS))
 
 CC           = cc
-CFLAGS       = -O3 -Wall -Wextra -Werror \
+CFLAGS       = -O3 -g3 -Wall -Wextra -Werror \
 		       -std=c89 -pedantic -Wconversion
 CPPFLAGS     = -I$(LIBFT_DIR) -I$(INCLUDEDIR)
 LDFLAGS      = -L$(LIBFT_DIR)

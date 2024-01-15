@@ -1,2 +1,3 @@
 - protect ALL mallocs
 - check for NULLs in deque, etc.
+- valgrind

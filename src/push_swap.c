@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 17:57:49 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 19:20:30 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ int	print_ops(t_deque *ops)
 	int			count;
 
 	count = 0;
-	while (ops->head)
+	while (ops && ops->head)
 	{
 		count += print_op(ops_strings[ops->head->data], 1);
 		free(deque_pop_top(ops));
 	}
-	deque_free(ops);
 	return (count);
 }
 
@@ -74,6 +73,8 @@ t_deque	*push_buckets(t_deque *deque_a, t_deque *deque_b, size_t bucket_size,
 				bucket_size = (size_t)ft_max((int)((double)bucket_size
 							* factor), 1);
 				n += bucket_size;
+				deque_free(slice);
+				deque_free(half_slice);
 				slice = deque_slice(sorted_deque, (int)(n - bucket_size),
 						(int)n, 1);
 				half_slice = deque_slice(sorted_deque, (int)(n - bucket_size),
@@ -92,6 +93,7 @@ t_deque	*push_buckets(t_deque *deque_a, t_deque *deque_b, size_t bucket_size,
 	}
 	deque_free(slice);
 	deque_free(half_slice);
+	deque_free(sorted_deque);
 	return (ops);
 }
 
@@ -276,6 +278,8 @@ t_deque	*push_swap_benchmark(t_deque *deque_a)
 	deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
 	/* fprintf(stderr, "Buckets: %zu\nFactor: %.10f\n", min_bucket_size,
 		best_factor); */
+	deque_free(deques[0]);
+	deque_free(deques[1]);
 	return (ops);
 }
 
@@ -318,20 +322,20 @@ t_state	*new_state(t_deque *deque_a, t_deque *deque_b, t_deque *ops)
 	return (state);
 }
 
-t_deque	*brute_force(t_deque *deque_a)
+t_deque	*brute_force(t_deque *sorted_a)
 {
-	t_deque		*sorted_a;
+	t_ddeque	*deques;
+	t_deque		*deque_a;
 	t_deque		*deque_b;
 	t_deque		*ops;
-	t_ddeque	*deques;
 
-	ops = deque_init();
-	deque_b = deque_init();
 	deques = ddeque_init();
-	sorted_a = deque_copy(deque_a);
+	deque_a = deque_init();
+	deque_b = deque_init();
+	ops = deque_init();
+	ddeque_push_value_bottom(deques, new_state(sorted_a, deque_b, ops));
 	deque_sort(sorted_a, cmp_int_asc);
 
-	ddeque_push_value_bottom(deques, new_state(deque_a, deque_b, ops));
 	/* test */
 	/* ddeque_push_value_bottom(deques, new_state(deque_a, deque_b, ops)); */
 	/* ddeque_print(deques, print_state); */
@@ -342,7 +346,18 @@ t_deque	*brute_force(t_deque *deque_a)
 
 	while (deques->size)
 	{
+		deque_free(deque_a);
+		deque_free(deque_b);
+		deque_free(ops);
+		deque_a = ((t_state *)deques->head->data)->deque_a;
+		deque_b = ((t_state *)deques->head->data)->deque_b;
+		ops = ((t_state *)deques->head->data)->ops;
+		free((free(deques->head->data), ddeque_pop_top(deques)));
+		ft_printf("ITER\n");
 	}
+	deque_free(deque_a);
+	deque_free(deque_b);
+	ddeque_free(deques, free);
 	return (ops);
 }
 
@@ -355,8 +370,8 @@ int	main(int argc, char **argv)
 	deque_a = parse_args(argc, argv);
 	sorted_deque = deque_copy(deque_a);
 	deque_sort(sorted_deque, cmp_int_asc);
-	if (deque_equal(deque_a, sorted_deque))
-		return (0);
+	if (deque_equal(deque_a, sorted_deque) && (deque_free(deque_a), 1))
+		return (deque_free(sorted_deque), 0);
 	if (deque_a->size < 10)
 	{
 		ops = brute_force(deque_a);
@@ -366,5 +381,6 @@ int	main(int argc, char **argv)
 	print_ops(ops);
 	deque_free(ops);
 	deque_free(deque_a);
+	deque_free(sorted_deque);
 	return (0);
 }

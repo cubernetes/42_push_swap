@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/22 18:55:00 by tischmid         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:39:44 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,14 +224,6 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 	return (ops);
 }
 
-void optimize_ops(t_deque **ops)
-{
-	t_deque	*new_ops;
-
-	deque_free(*ops);
-	*ops = new_ops;
-}
-
 t_deque	*push_swap_benchmark(t_deque *deque_a)
 {
 	t_deque	*deques[2];
@@ -263,7 +255,7 @@ t_deque	*push_swap_benchmark(t_deque *deque_a)
 			deque_extend_free(ops, push_buckets(deques[0], deques[1],
 					bucket_size, factor));
 			deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
-			if (optimize_ops(&ops) < (size_t)min_ops)
+			if (deque_size(ops) < (size_t)min_ops)
 			{
 				min_bucket_size = bucket_size;
 				best_factor = factor;

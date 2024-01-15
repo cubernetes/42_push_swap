@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 22:25:36 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 23:40:42 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	deque_argmax(t_deque *deque, int *max_idx)
 	orig_head = deque->head;
 	head = orig_head;
 	if (!head)
-		return (INT_MIN);
+		return (*max_idx = -1, INT_MIN);
 	idx = 0;
 	if (max_idx)
 		*max_idx = idx;
@@ -156,20 +156,19 @@ int	bottom_element_of_A_should_be_rotated(t_deque *deque_a, t_deque *deque_b)
 	t_deque_type	a_bottom;
 	t_deque_type	a_max;
 	t_deque_type	b_max;
-	t_deque_type	a_max_idx;
-	t_deque_type	b_max_idx;
+	t_deque_type	max_idx;
 	t_deque_type	max;
 
 	if (!deque_a->head)
 		return (0);
 	a_bottom = deque_a->head->prev->data;
-	a_max = deque_argmax(deque_a, &a_max_idx);
-	b_max = deque_argmax(deque_b, &b_max_idx);
+	a_max = deque_argmax(deque_a, &max_idx);
+	b_max = deque_argmax(deque_b, &max_idx);
 	max = ft_max(a_max, b_max);
-	if (a_bottom > b_max && a_bottom != max)
-	{
+	if (a_bottom >= b_max && a_bottom != max)
 		return (1);
-	}
+	if (max_idx == -1 && a_bottom <= deque_a->head->data)
+		return (1);
 	return (0);
 }
 
@@ -411,14 +410,16 @@ t_deque	*generate_next_states(t_ddeque *deques, t_deque *deque_a,
 		copy_b = deque_copy(deque_b);
 		ops_copy = deque_copy(ops);
 		insts[i](copy_a, copy_b, ops_copy);
-		if (deque_equal(deque_a, copy_a) && deque_equal(deque_b, copy_b))
+		if (deque_equal(deque_a, copy_a) && deque_equal(deque_b, copy_b)
+			&& (deque_free(copy_a), 1) && (deque_free(copy_b), 1)
+			&& (deque_free(ops_copy), 1))
 			continue ;
 		if (deque_equal(copy_a, sorted_a) && (deque_free(copy_a), 1))
-			return (deque_free(copy_b), ops_copy);
+			return (deque_free(copy_b), deque_free(ops), ops_copy);
 		ddeque_push_node_bottom(deques,
 			new_state_node(copy_a, copy_b, ops_copy));
 	}
-	return (deque_init());
+	return (deque_free(ops), deque_init());
 }
 
 void	free_state(void	*state)

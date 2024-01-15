@@ -6,7 +6,7 @@
 /*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:28:18 by tosuman           #+#    #+#             */
-/*   Updated: 2024/01/15 11:33:27 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 23:24:47 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int	ft_atoi_status(char const *nptr, int *status)
 	long	res;
 	int		sign;
 
-	*status = 0;
 	sign = 1;
 	if (*nptr == '+' || *nptr == '-')
 		if (*nptr++ == '-')
 			sign = -1;
 	res = 0;
+	if (!*nptr)
+		*status = -1;
 	while (ft_isdigit(*nptr))
 	{
 		res = res * 10 + *nptr++ - '0';

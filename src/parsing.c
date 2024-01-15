@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:47:03 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 19:19:09 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 23:25:35 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_deque	*parse_args(int argc, char **argv)
 	t_deque	*deque;
 	int		status;
 
+	status = 0;
 	if (argc < 1)
 		exit(1);
 	if (argc == 1)
@@ -57,6 +58,8 @@ t_deque	*parse_args(int argc, char **argv)
 		list = ft_split(argv[1], ' ');
 		orig_list = list;
 		deque = array_list_to_deque(list, &status);
+		if (!*list)
+			status = -1;
 		while (*list)
 		{
 			free(*list);

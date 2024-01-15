@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 22:24:04 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 23:54:44 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_state
 	t_deque	*deque_b;
 	t_deque	*ops;
 }			t_state;
-
 
 int		validate_arguments(char **list);
 t_deque	*parse_args(int argc, char **argv);

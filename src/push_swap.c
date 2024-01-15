@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 23:40:42 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 23:55:04 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ int	b_top_is_bigger_than_a_bottom(t_deque *deque_a, t_deque *deque_b)
 	return (0);
 }
 
-int	bottom_element_of_A_should_be_rotated(t_deque *deque_a, t_deque *deque_b)
+int	bottom_element_of_a_should_be_rotated(t_deque *deque_a, t_deque *deque_b)
 {
 	t_deque_type	a_bottom;
 	t_deque_type	a_max;
@@ -181,7 +181,7 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 	ops = deque_init();
 	while (deque_b->head)
 	{
-		while (bottom_element_of_A_should_be_rotated(deque_a, deque_b))
+		while (bottom_element_of_a_should_be_rotated(deque_a, deque_b))
 		{
 			deque_push_value_bottom(ops, OP_RRA);
 			deque_rotate(deque_a, -1);
@@ -216,7 +216,7 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 		deque_push_value_bottom(ops, OP_PA);
 		deque_push_node_top(deque_a, deque_pop_top(deque_b));
 	}
-	while (bottom_element_of_A_should_be_rotated(deque_a, deque_b))
+	while (bottom_element_of_a_should_be_rotated(deque_a, deque_b))
 	{
 		deque_push_value_bottom(ops, OP_RRA);
 		deque_rotate(deque_a, -1);
@@ -275,8 +275,6 @@ t_deque	*push_swap_benchmark(t_deque *deque_a)
 	deque_extend_free(ops, push_buckets(deques[0], deques[1], min_bucket_size,
 			best_factor));
 	deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
-	/* fprintf(stderr, "Buckets: %zu\nFactor: %.10f\n", min_bucket_size,
-		best_factor); */
 	deque_free(deques[0]);
 	deque_free(deques[1]);
 	return (deque_free(deque_a), ops);
@@ -404,7 +402,7 @@ t_deque	*generate_next_states(t_ddeque *deques, t_deque *deque_a,
 	int			i;
 
 	i = -1;
-	while (++i < (int)(sizeof(insts)/sizeof(insts[0])))
+	while (++i < (int)(sizeof(insts) / sizeof(insts[0])))
 	{
 		copy_a = deque_copy(deque_a);
 		copy_b = deque_copy(deque_b);

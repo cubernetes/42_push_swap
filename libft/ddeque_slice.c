@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:39:06 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 15:45:54 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 17:58:54 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_ddeque	*ddeque_shallow_slice(t_ddeque *ddeque, int start, int end,
 	int				orig_start;
 
 	slice = ddeque_init();
-	size = (int)ddeque_size(ddeque);
+	size = (int)ddeque->size;
 	orig_start = start;
 	if (start < 0)
 		start = ft_max(start + size, 0);
@@ -33,7 +33,6 @@ t_ddeque	*ddeque_shallow_slice(t_ddeque *ddeque, int start, int end,
 		end = size;
 	else if ((end - start) * step <= 0)
 		return (slice);
-	/* return (slice->size = , slice); */ /* TODO: set the slice size!!! */
 	head = ddeque->head;
 	size = start;
 	while (size--)

@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:41:09 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 15:20:59 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 17:52:14 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ t_ddeque_node	*ddeque_pop_top(t_ddeque *ddeque)
 	t_ddeque_node	*next;
 
 	head = ddeque->head;
-	prev = head->prev;
-	next = head->next;
 	if (!head)
 		return (NULL);
+	prev = head->prev;
+	next = head->next;
 	if (head == head->next)
 		ddeque->head = NULL;
 	else

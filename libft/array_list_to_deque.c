@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:25:38 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 11:16:33 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 16:18:12 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_deque	*array_list_to_deque(char **array_list, int *status)
 		deque_push_value_bottom(deque,
 			(t_deque_type)ft_atoi_status(*array_list, status));
 		++array_list;
-		deque->size += 1;
 	}
 	return (deque);
 }

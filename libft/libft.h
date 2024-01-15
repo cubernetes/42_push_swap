@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:09:08 by tischmid          #+#    #+#             */
-/*   Updated: 2023/11/22 17:40:56 by tischmid         ###   ########.fr       */
+/*   Updated: 2023/12/05 05:02:24 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_gnl_vars
 {
 	char					*prv[OPEN_MAX];
 	char					*buf;
-	ssize_t					bread;
+	ssize_t					b;
 	int						i;
 	int						j;
 	int						len;

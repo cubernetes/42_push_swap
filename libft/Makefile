@@ -6,7 +6,7 @@
 #    By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 15:09:11 by tischmid          #+#    #+#              #
-#    Updated: 2023/11/22 18:11:29 by tischmid         ###   ########.fr        #
+#    Updated: 2023/12/05 04:56:11 by tosuman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,8 @@ _SRC += deque_equal.c
 
 _SRC += cmp_int_desc.c
 _SRC += cmp_int_asc.c
+
+_SRC += get_next_line.c
 
 unexport _DEPS
 _DEPS += libft.h

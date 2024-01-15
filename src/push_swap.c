@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 15:50:10 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/15 15:54:37 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_deque	*push_buckets(t_deque *deque_a, t_deque *deque_b, size_t bucket_size,
 				n += bucket_size;
 				slice = deque_slice(sorted_deque, (int)(n - bucket_size), (int)n, 1);
 				half_slice = deque_slice(sorted_deque, (int)(n - bucket_size), (int)(n
-						- bucket_size / 2), 1);
+							- bucket_size / 2), 1);
 			}
 		}
 		else
@@ -208,8 +208,8 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 				}
 				else
 				{
-				 deque_push_value_bottom(ops, OP_RB);
-				 deque_rotate(deque_b, 1);
+					deque_push_value_bottom(ops, OP_RB);
+					deque_rotate(deque_b, 1);
 				}
 			}
 		}
@@ -310,8 +310,8 @@ t_deque	*brute_force(t_deque *deque_a)
 int	main(int argc, char **argv)
 {
 	t_deque	*deque_a;
-	/* t_deque	*sorted_deque; */
 	t_deque	*ops;
+	/* t_deque	*sorted_deque; */
 
 	deque_a = parse_args(argc, argv);
 	/* sorted_deque = deque_copy(deque_a); */

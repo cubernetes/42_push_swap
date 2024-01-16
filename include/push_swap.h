@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 23:54:44 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 11:53:28 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ typedef struct s_state
 	t_deque	*deque_b;
 	t_deque	*ops;
 }			t_state;
+
+typedef struct s_bucket_data
+{
+	t_deque	*slice;
+	t_deque	*h_slice;
+	t_deque	*ops;
+	size_t	n;
+	size_t	buck_siz;
+	double	factor;
+}			t_bucket_data;
 
 int		validate_arguments(char **list);
 t_deque	*parse_args(int argc, char **argv);

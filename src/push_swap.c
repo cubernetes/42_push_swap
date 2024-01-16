@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/16 12:39:23 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 12:49:53 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,47 +162,54 @@ int	bottom_element_of_a_should_be_rotated(t_deque *deque_a, t_deque *deque_b)
 	return (0);
 }
 
+void	rev_rotate_b(int idx_max, t_deque *deque_b, t_deque *ops)
+{
+	int	i;
+
+	i = -1;
+	while (++i < (int)deque_b->size - idx_max)
+	{
+		deque_push_value_bottom(ops, OP_RRB);
+		deque_rotate(deque_b, -1);
+	}
+}
+
+void	rotate_b(int idx_max, t_deque *deque_a, t_deque *deque_b, t_deque *ops)
+{
+	int	i;
+
+	i = -1;
+	while (++i < idx_max)
+	{
+		if (b_top_is_bigger_than_a_bottom(deque_a, deque_b))
+		{
+			deque_push_value_bottom(ops, OP_PA);
+			deque_push_value_bottom(ops, OP_RA);
+			deque_push_node_bottom(deque_a, deque_pop_top(deque_b));
+		}
+		else
+		{
+			deque_push_value_bottom(ops, OP_RB);
+			deque_rotate(deque_b, 1);
+		}
+	}
+}
+
 t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 {
 	t_deque	*ops;
-	int		i;
 	int		idx_max;
 
 	ops = deque_init();
 	while (deque_b->head)
 	{
 		while (bottom_element_of_a_should_be_rotated(deque_a, deque_b))
-		{
-			deque_push_value_bottom(ops, OP_RRA);
-			deque_rotate(deque_a, -1);
-		}
+			(deque_push_value_bottom(ops, OP_RRA), deque_rotate(deque_a, -1));
 		deque_argmax(deque_b, &idx_max);
-		i = -1;
 		if ((int)deque_b->size - idx_max < idx_max)
-		{
-			while (++i < (int)deque_b->size - idx_max)
-			{
-				deque_push_value_bottom(ops, OP_RRB);
-				deque_rotate(deque_b, -1);
-			}
-		}
+			rev_rotate_b(idx_max, deque_b, ops);
 		else
-		{
-			while (++i < idx_max)
-			{
-				if (b_top_is_bigger_than_a_bottom(deque_a, deque_b))
-				{
-					deque_push_value_bottom(ops, OP_PA);
-					deque_push_value_bottom(ops, OP_RA);
-					deque_push_node_bottom(deque_a, deque_pop_top(deque_b));
-				}
-				else
-				{
-					deque_push_value_bottom(ops, OP_RB);
-					deque_rotate(deque_b, 1);
-				}
-			}
-		}
+			rotate_b(idx_max, deque_a, deque_b, ops);
 		deque_push_value_bottom(ops, OP_PA);
 		deque_push_node_top(deque_a, deque_pop_top(deque_b));
 	}

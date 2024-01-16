@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/16 13:10:28 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:20:43 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_bucket_data
 
 int				validate_arguments(char **list);
 t_deque			*parse_args(int argc, char **argv);
-
 void			op_ra(t_deque *deque_a, t_deque *deque_b, t_deque *ops);
 void			op_rb(t_deque *deque_a, t_deque *deque_b, t_deque *ops);
 void			op_rr(t_deque *deque_a, t_deque *deque_b, t_deque *ops);

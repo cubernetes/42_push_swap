@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:09:08 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/16 13:08:18 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 15:51:07 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_list
 typedef struct s_deque			t_deque;
 typedef struct s_deque_node		t_deque_node;
 
+/* default */
 typedef int						t_deque_type;
 
 struct							s_deque_node
@@ -116,6 +117,7 @@ char							*ft_strdup(char const *s);
 int								ft_strncmp(char const *s1, char const *s2,
 									size_t n);
 int								ft_strcmp(char const *s1, char const *s2);
+int								ft_streq(char const *s1, char const *s2);
 size_t							ft_strlen(char const *s);
 char							**ft_split(char const *s, char c);
 char							*ft_strjoin(char const *s1, char const *s2);

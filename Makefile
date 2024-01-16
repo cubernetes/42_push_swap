@@ -6,7 +6,7 @@
 #    By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 15:02:16 by tischmid          #+#    #+#              #
-#    Updated: 2024/01/16 13:13:04 by tosuman          ###   ########.fr        #
+#    Updated: 2024/01/16 13:23:13 by tosuman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_       = $(patsubst lib%,%,$(patsubst %.a,%,$(LIBFT)))
 unexport _SRC
 _SRC         += push_swap.c
 _SRC         += parsing.c
-_SRC         += brute_force_states.c
+_SRC         += brute_force.c
 _SRC         += ops1.c
 _SRC         += ops2.c
 _SRC         += ops3.c

@@ -6,7 +6,7 @@
 /*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:58:58 by tosuman           #+#    #+#             */
-/*   Updated: 2024/01/16 13:23:35 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 13:25:58 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ t_ddeque_node	*new_state_node(t_deque *deque_a, t_deque *deque_b,
 t_deque	*generate_next_states(t_ddeque *deques, t_deque *deque_a_b[2],
 		t_deque *ops, t_deque *sorted_a)
 {
-	static void	(*insts[])(t_deque *, t_deque *, t_deque *);
+	static void	(*insts[])(t_deque *, t_deque *, t_deque *) = {op_ra, op_rb,
+		op_sa, op_sb, op_pa, op_pb};
 	t_deque		*copy_a;
 	t_deque		*copy_b;
 	t_deque		*ops_copy;
 	int			i;
 
-	(insts[])(t_deque , t_deque , t_deque ) = {op_ra, op_rb, op_sa, op_sb,
-		op_pa, op_pb};
 	i = -1;
 	while (++i < (int)(sizeof(insts) / sizeof(insts[0])))
 	{

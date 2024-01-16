@@ -6,13 +6,14 @@
 /*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:04:57 by tosuman           #+#    #+#             */
-/*   Updated: 2024/01/16 16:32:40 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 18:41:56 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 int	print_op(char *op, int amount)
 {

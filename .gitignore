@@ -3,3 +3,5 @@ checker_linux
 push_swap_tester/
 push_swap_test_linux.sh
 push_swap
+0
+traces.txt

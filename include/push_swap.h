@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:35:28 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/16 11:53:28 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 12:02:42 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct s_bucket_data
 	t_deque	*ops;
 	size_t	n;
 	size_t	buck_siz;
+	size_t	min_buck_siz;
 	double	factor;
+	double	bst_factor;
 }			t_bucket_data;
 
 int		validate_arguments(char **list);

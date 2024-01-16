@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 09:19:44 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/16 11:55:41 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 12:39:23 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,8 @@ int	deque_argmax(t_deque *deque, int *max_idx)
 		*max_idx = idx;
 	max_value = head->data;
 	head = head->next;
-	while (head != orig_head)
+	while (++idx && head != orig_head)
 	{
-		++idx;
 		if (head->data > max_value)
 		{
 			max_value = head->data;
@@ -126,8 +125,7 @@ int	b_top_is_bigger_than_a_bottom(t_deque *deque_a, t_deque *deque_b)
 	t_deque_type	b_top;
 	t_deque_type	a_bottom;
 	t_deque_type	a_max;
-	t_deque_type	a_max_idx;
-	t_deque_type	b_max_idx;
+	t_deque_type	max_idx;
 	t_deque_type	max;
 
 	if (!deque_a->head)
@@ -136,12 +134,10 @@ int	b_top_is_bigger_than_a_bottom(t_deque *deque_a, t_deque *deque_b)
 		return (0);
 	b_top = deque_b->head->data;
 	a_bottom = deque_a->head->prev->data;
-	a_max = deque_argmax(deque_a, &a_max_idx);
-	max = ft_max(a_max, deque_argmax(deque_b, &b_max_idx));
+	a_max = deque_argmax(deque_a, &max_idx);
+	max = ft_max(a_max, deque_argmax(deque_b, &max_idx));
 	if (b_top > a_bottom || a_bottom == max)
-	{
 		return (1);
-	}
 	return (0);
 }
 
@@ -218,47 +214,48 @@ t_deque	*push_back_sorted(t_deque *deque_a, t_deque *deque_b)
 	return (ops);
 }
 
+void	push_swap(int *min_ops, t_deque **ops, t_deque *deques[3],
+		t_bucket_data *d)
+{
+	(deque_free(*ops), *ops = deque_init());
+	(deque_free(deques[0]), deques[0] = deque_copy(deques[2]));
+	(deque_free(deques[1]), deques[1] = deque_init());
+	deque_extend_free(*ops, push_buckets(deques[0], deques[1],
+			*d));
+	deque_extend_free(*ops, push_back_sorted(deques[0], deques[1]));
+	if ((*ops)->size < (size_t)(*min_ops))
+	{
+		d->min_buck_siz = d->buck_siz;
+		d->bst_factor = d->factor;
+		*min_ops = (int)(*ops)->size;
+	}
+	d->factor -= 0.01;
+}
+
 /* 500 -> 80-120 and 0.79-0.91 */
 t_deque	*push_swap_benchmark(t_deque *deque_a)
 {
-	t_deque			*deques[2];
+	t_deque			*deques[3];
 	t_deque			*ops;
-	size_t			min_bucket_size;
-	double			best_factor;
 	int				min_ops;
 	t_bucket_data	d;
 
 	min_ops = INT_MAX;
-	deques[0] = deque_init();
-	deques[1] = deque_init();
-	d.buck_siz = 0;
-	min_bucket_size = 1;
+	(free(NULL), deques[0] = deque_init(), deques[1] = deque_init());
+	deques[2] = deque_a;
+	(free(NULL), d.buck_siz = 0, d.min_buck_siz = 1);
 	ops = deque_init();
-	best_factor = 1.0;
+	d.bst_factor = 1.0;
 	while (++d.buck_siz < (size_t)ft_min(120, ft_max(80,
 				(int)deque_a->size)))
 	{
 		d.factor = 0.91;
 		while (d.factor > 0.79)
-		{
-			(deque_free(ops), ops = deque_init());
-			(deque_free(deques[0]), deques[0] = deque_copy(deque_a));
-			(deque_free(deques[1]), deques[1] = deque_init());
-			deque_extend_free(ops, push_buckets(deques[0], deques[1],
-					d));
-			deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
-			if (ops->size < (size_t)min_ops)
-			{
-				min_bucket_size = d.buck_siz;
-				best_factor = d.factor;
-				min_ops = (int)ops->size;
-			}
-			d.factor -= 0.01;
-		}
+			push_swap(&min_ops, &ops, deques, &d);
 	}
-	(deque_free(ops), ops = deque_init(), d.buck_siz = min_bucket_size);
+	(deque_free(ops), ops = deque_init(), d.buck_siz = d.min_buck_siz);
 	(deque_free(deques[0]), deques[0] = deque_copy(deque_a));
-	(deque_free(deques[1]), deques[1] = deque_init(), d.factor = best_factor);
+	(deque_free(deques[1]), deques[1] = deque_init(), d.factor = d.bst_factor);
 	deque_extend_free(ops, push_buckets(deques[0], deques[1], d));
 	deque_extend_free(ops, push_back_sorted(deques[0], deques[1]));
 	(deque_free(deques[0]), deque_free(deques[1]));

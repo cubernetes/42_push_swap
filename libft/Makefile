@@ -6,7 +6,7 @@
 #    By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 15:09:11 by tischmid          #+#    #+#              #
-#    Updated: 2024/01/15 15:48:39 by tosuman          ###   ########.fr        #
+#    Updated: 2024/01/16 13:08:33 by tosuman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,7 @@ _SRC += deque_push_value_bottom.c
 _SRC += deque_push_node_top.c
 _SRC += deque_push_value_top.c
 _SRC += deque_equal.c
+_SRC += deque_argmax.c
 
 _SRC += ddeque_init.c
 _SRC += ddeque_free.c

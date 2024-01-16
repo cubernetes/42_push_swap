@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:09:08 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/15 15:49:41 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 13:08:18 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ int								deque_index(t_deque *deque, t_deque_type data);
 void							deque_extend_free(t_deque *deque_a,
 									t_deque *deque_b);
 int								deque_equal(t_deque *deque_a, t_deque *deque_b);
+int								deque_argmax(t_deque *deque, int *max_idx);
 
 /* data deque */
 t_ddeque_node					*ddeque_pop_bottom(t_ddeque *ddeque);

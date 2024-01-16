@@ -6,7 +6,7 @@
 /*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:04:00 by tosuman           #+#    #+#             */
-/*   Updated: 2024/01/16 16:31:13 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 17:00:18 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_deque	*parse_input(void)
 	i = 0;
 	while (++i)
 	{
+		inst = NULL;
 		inst = get_next_line(0);
 		if (!inst)
 			break ;

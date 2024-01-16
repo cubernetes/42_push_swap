@@ -6,7 +6,7 @@
 /*   By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:09:08 by tischmid          #+#    #+#             */
-/*   Updated: 2024/01/16 18:37:15 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 19:08:55 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,15 @@ struct							s_deque
 };
 
 /* Quote Norm:
-
-Preprocessor constants (or #define) you create must
-be used only for literal and constant values.
-
-But you don't want to allocate on the heap everytime if you know your data
-is an int or the like. That's why we create another deque type, the
-data deque (ddeque), where you always need to allocate on the heap for the data.
-*/
+ * 
+ * Preprocessor constants (or #define) you create must
+ * be used only for literal and constant values.
+ * 
+ * But you don't want to allocate on the heap everytime if you know your data
+ * is an int or the like. That's why we create another deque type, the
+ * data deque (ddeque), where you always need to allocate on the heap
+ * for the data.
+ */
 typedef struct s_ddeque			t_ddeque;
 typedef struct s_ddeque_node	t_ddeque_node;
 

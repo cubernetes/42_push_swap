@@ -6,11 +6,14 @@
 #    By: tischmid <tischmid@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 15:02:16 by tischmid          #+#    #+#              #
-#    Updated: 2024/01/16 17:01:27 by tosuman          ###   ########.fr        #
+#    Updated: 2024/01/16 19:13:38 by tosuman          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Makefile for Linux systems
+# Source Lines of Code (including libft): 2838
+# Source Lines of Code (excluding libft, including deque code): 1568
+# Source Lines of Code (excluding libft): 692
 
 NAME            := push_swap
 BONUS           := checker

@@ -6,7 +6,7 @@
 /*   By: tosuman <timo42@proton.me>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:04:00 by tosuman           #+#    #+#             */
-/*   Updated: 2024/01/16 17:00:18 by tosuman          ###   ########.fr       */
+/*   Updated: 2024/01/16 17:33:09 by tosuman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,12 @@ t_deque	*parse_input(void)
 	i = 0;
 	while (++i)
 	{
-		inst = NULL;
 		inst = get_next_line(0);
 		if (!inst)
 			break ;
 		idx = ddeque_index(all_ops, inst, (int (*)(void *, void *))ft_streq);
 		if (idx == -1 && (ddeque_free(all_ops, free), 1))
-			(deque_free(ops), ft_printf("Error\n"), ft_printf("issue:<%d><%s>\n", i, inst), free(inst), exit(3));
+			(deque_free(ops), ft_printf("Error: %s\n", inst), free(inst), exit(3));
 		free(inst);
 		deque_push_value_bottom(ops, idx);
 	}
